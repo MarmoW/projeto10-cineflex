@@ -1,0 +1,133 @@
+.cineflex-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 67px;
+    background-color: #C3CFD9;
+    color: #E8833A;
+    Font-family: Roboto;
+    Font-style: Regular;
+    Font-size: 34px;
+    Line-height: 40px;
+    Line-height: 100%;
+
+}
+
+.page-content {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 67px;
+}
+
+.select-movies {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 100%;
+    height: 110px;
+    color: #293845;
+    Font-family: Roboto;
+    Font-style: Regular;
+    Font-size: 24px;
+    Line-height: 28px;
+    Line-height: 100%;
+
+}
+.movies-divs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 100%;
+}
+
+.movies {
+    flex: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 145px;
+    min-Width: 145px;
+    Height: 209px;
+    background-color: pink;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.movie-sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    Font family: Roboto;
+    Font-style: Regular;
+    Font-size: 20px;
+    Line-height: 23px;
+    Line-height: 100%;
+    margin-left: 24px;
+}
+.button-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.pick-time {
+    width: 83px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    Font-family: Roboto;
+    Font-style: Regular;
+    Font-size: 18px;
+    Line-height: 21px;
+    Line-height: 100%;
+    color: #FFFFFF;
+    background-color: #E8833A;
+    border-radius: 3px;
+    border: none;
+    margin-right: 9px;
+    margin-top: 22px;
+    margin-bottom: 23px;
+}
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 117px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    background-color: green;
+    box-sizing: border-box;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 10px;
+    Font-family: Roboto;
+    Font-style: Regular;
+    Font-size: 26px;
+    Line-height: 30px;
+    Line-height: 100%;
+}
+.movie-poster-footer {
+    flex: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    min-Width: 64px;
+    Height: 89px;
+    background-color: pink;
+    margin-right: 14px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
