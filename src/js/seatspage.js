@@ -3,20 +3,21 @@ import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
 import ReactDOM from "react-dom";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import CreateSeat from "./createseat.js"
 
-export default function SeatsPage({setUsername, setUsercpf, usercpf, username}) {
+export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
     const [selected, setSelected] = React.useState([])
     const { idsec } = useParams();
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idsec}/seats`
-    
+    const navigate = useNavigate();
     useEffect(() => {
 		const request = axios.get(URL);
 
 		request.then(resposta => {
 		    setSeatoptions(resposta.data);
+            setSecinfo(resposta.data);
 		});
         console.log(seatoptions)
 	}, []);
@@ -29,6 +30,8 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username}) 
     function saveUser(event) {
         event.preventDefault();
         console.log(username, usercpf);
+        navigate("/sucesso");
+        
     }
 
     return (

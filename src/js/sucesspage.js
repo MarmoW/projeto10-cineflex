@@ -4,8 +4,11 @@ import styled from "styled-components";
 import axios from "axios";
 import ReactDOM from "react-dom";
 
-export default function SucessPage({usercpf, username}) {
-
+export default function SucessPage({usercpf, username, secinfo}) {
+    function Redirect() {
+        window.location.href = '/'
+    }
+    console.log(usercpf, username)
     return(
         <>
         <Header><p>Cineflex</p></Header>
@@ -13,8 +16,8 @@ export default function SucessPage({usercpf, username}) {
         <OrderOk>Pedido feito com sucesso!</OrderOk>
         <div data-test="movie-info">
         <SubTittle>Filme e sessão</SubTittle>
-        <OrderInfos>Enola Holmes</OrderInfos>
-        <OrderInfos>24/06/2021 15:00</OrderInfos>
+        <OrderInfos>{secinfo.movie.title}</OrderInfos>
+        <OrderInfos>{secinfo.day.date}-{secinfo.name}</OrderInfos>
         </div>
         <div data-test="seats-info">
         <SubTittle>Ingressos</SubTittle>
@@ -22,10 +25,10 @@ export default function SucessPage({usercpf, username}) {
         </div>
         <div data-test="client-info">
         <SubTittle>Comprador</SubTittle>
-        <OrderInfos>Marcelinho</OrderInfos>
-        <OrderInfos>2020202020</OrderInfos>
+        <OrderInfos>{username}</OrderInfos>
+        <OrderInfos>{usercpf}</OrderInfos>
         </div>
-        <ConfirmButton data-test="go-home-btn">Voltar pra Home</ConfirmButton>
+        <ConfirmButton data-test="go-home-btn" onClick={Redirect}>Voltar pra Home</ConfirmButton>
         </PageContent>
         </>
 

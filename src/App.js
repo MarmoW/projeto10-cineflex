@@ -10,6 +10,7 @@ import SucessPage from "./js/sucesspage.js";
 function App() {
   const [username, setUsername] = React.useState("")
   const [usercpf, setUsercpf] = React.useState("")
+  const [secinfo, setSecinfo] = React.useState(undefined)
 
 
   return (
@@ -17,8 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/sessoes/:id/" element={<SectionPage setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username}/>} />
-        <Route path="/assentos/:idsec/" element={<SeatsPage setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username}/>}/>
-        <Route path="/sucesso" element={<SucessPage usercpf={usercpf} username={username}/>} />
+        <Route path="/assentos/:idsec/" element={<SeatsPage setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username} setSecinfo={setSecinfo}/>}/>
+        <Route path="/sucesso" element={<SucessPage usercpf={usercpf} username={username} secinfo={secinfo}/>} />
       </Routes>
     </BrowserRouter>
   );
