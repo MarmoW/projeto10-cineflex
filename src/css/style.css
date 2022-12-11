@@ -62,17 +62,6 @@
     border-radius: 4px;
 }
 
-.movie-sections {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    Font family: Roboto;
-    Font-style: Regular;
-    Font-size: 20px;
-    Line-height: 23px;
-    Line-height: 100%;
-    margin-left: 24px;
-}
 .button-div {
     display: flex;
     flex-direction: row;

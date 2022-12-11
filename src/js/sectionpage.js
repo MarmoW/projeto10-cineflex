@@ -2,12 +2,14 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
 
 
 export default function SectionPage() {
     const  [infosections, letInfosections] = React.useState(undefined)
-    let URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes`
+    const { id } = useParams();
+    let URL = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${id}/showtimes`
 
     useEffect(() => {
 		const request = axios.get(URL);
@@ -28,16 +30,15 @@ export default function SectionPage() {
     <Header><p>Cineflex</p></Header>
     <PageContent>
       <SelectMovies><p>Selecione o horário</p></SelectMovies>
-    </PageContent>
     {infosections.days.map((days) => 
     <MovieSections key={days.id}>
     <p>{days.weekday} - {days.date}</p>
     <ButtonDiv>
-        {days.showtimes.map((times) => <PickTime key={times.id}> {times.name}</PickTime>)}
+        {days.showtimes.map((times) => <Link to={`/assentos/${times.id}/`} key={times.id}><PickTime> {times.name}</PickTime></Link>)}
     </ButtonDiv>
     </MovieSections>  
-
     )}
+    </PageContent>
     <Footer>
         <SmallPoster src={infosections.posterURL}/>
         <p>{infosections.title}</p>
@@ -49,10 +50,11 @@ export default function SectionPage() {
 }
 const PageContent = styled.div`
     display: flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content: center;
     flex-direction: column;
     margin-top: 67px;
+    margin-bottom: 117px;
     background-color: #ffffff`
 const SelectMovies =styled.div`
     display: flex;
@@ -62,7 +64,7 @@ const SelectMovies =styled.div`
     height: 110px;
     color: #293845;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 24px;
     Line-height: 28px;
     Line-height: 100%;`
@@ -71,7 +73,7 @@ const MovieSections = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     Font family: Roboto;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 20px;
     Line-height: 23px;
     Line-height: 100%;
@@ -92,7 +94,7 @@ const Footer = styled.div`
     padding-bottom: 14px;
     padding-left: 10px;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 26px;
     Line-height: 30px;
     Line-height: 100%;
@@ -115,7 +117,7 @@ const PickTime = styled.button`
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 18px;
     Line-height: 21px;
     Line-height: 100%;
@@ -125,11 +127,13 @@ const PickTime = styled.button`
     border: none;
     margin-right: 9px;
     margin-top: 22px;
-    margin-bottom: 23px;`
+    margin-bottom: 23px;
+    text-decoration: none;`
 const ButtonDiv = styled.div`display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;`
+    align-items: center;
+    a {text-decoration: none;}`
 const Header = styled.div`
     position: fixed;
     top: 0;
@@ -142,7 +146,7 @@ const Header = styled.div`
     background-color: #C3CFD9;
     color: #E8833A;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 34px;
     Line-height: 40px;
     Line-height: 100%;`
@@ -159,3 +163,4 @@ const Header = styled.div`
 </MovieSections>
 
 */
+

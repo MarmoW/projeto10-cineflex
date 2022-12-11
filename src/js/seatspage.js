@@ -3,10 +3,15 @@ import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
 import ReactDOM from "react-dom";
+import { Link, useParams } from "react-router-dom";
+import CreateSeat from "./createseat.js"
 
-export default function SeatsPage() {
+export default function SeatsPage({setUsername, setUsercpf, usercpf, username}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
-    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/240/seats`
+    const [selected, setSelected] = React.useState([])
+    const { idsec } = useParams();
+    const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idsec}/seats`
+    
     useEffect(() => {
 		const request = axios.get(URL);
 
@@ -21,27 +26,38 @@ export default function SeatsPage() {
         return 
     }
     
+    function saveUser(event) {
+        event.preventDefault();
+        console.log(username, usercpf);
+    }
+
     return (
         <>
         <Header><p>Cineflex</p></Header>
         <PageContent>
             <SelectMovies><p>Selecione o(s) assento(s)</p></SelectMovies>
-        </PageContent>
         <SeatsDiv>
-            {seatoptions.seats.map((seat) => <Seats key={seat.id}>{seat.name}</Seats>)}            
+            {seatoptions.seats.map((seat) =>  <Seats key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></Seats>)}           
         </SeatsDiv>
-        <ReserveForm>
+        <Legenda>
+            <DivLegendas><SeatsSelected /><div>Selecionado</div></DivLegendas>
+            <DivLegendas><Seats disponivel={true}></Seats><div>Disponível</div></DivLegendas>
+            <DivLegendas><Seats disponivel={false}></Seats><div>Indisponível</div></DivLegendas>
+            
+        </Legenda>
+        <ReserveForm onSubmit={saveUser}>
             <p>Nome do comprador:</p>
-            <ReserveInput type="text" placeholder="Digite seu nome..."/>
+            <ReserveInput type="text" placeholder="Digite seu nome..." value={username} onChange={(e) => setUsername(e.target.value)} required/>
             <p>CPF do comprador:</p>
-            <ReserveInput type="text" placeholder="Digite seu CPF..."/>
-            <ReserveButton>Reservar assento(s)</ReserveButton>
+            <ReserveInput type="text" placeholder="Digite seu CPF..." value={usercpf} onChange={(e) => setUsercpf(e.target.value)} required/>
+            <ReserveButton type="submit">Reservar assento(s)</ReserveButton>
         </ReserveForm>
+        </PageContent>
         <Footer>
         <SmallPoster src={seatoptions.movie.posterURL}/>
             <FooterDiv>
-                <p>{seatoptions.movie.title}</p>
-                <p>{seatoptions.day.weekday}-{seatoptions.day.date}</p>
+                <div>{seatoptions.movie.title}</div>
+                <div>{seatoptions.day.weekday}-{seatoptions.name}</div>
             </FooterDiv>
         </Footer>
         
@@ -63,7 +79,7 @@ const Header = styled.div`
     background-color: #C3CFD9;
     color: #E8833A;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 34px;
     Line-height: 40px;
     Line-height: 100%;
@@ -84,7 +100,7 @@ const Footer = styled.div`
     padding-bottom: 14px;
     padding-left: 10px;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 26px;
     Line-height: 30px;
     Line-height: 100%;
@@ -98,17 +114,18 @@ const SelectMovies =styled.div`
     height: 110px;
     color: #293845;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 24px;
     Line-height: 28px;
     Line-height: 100%;
     `
 const PageContent = styled.div`
     display: flex;
-    align-items:center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
     margin-top: 67px;
+    margin-bottom: 122px;
     background-color: #ffffff
     `
 const SeatsDiv = styled.div`
@@ -118,8 +135,8 @@ const SeatsDiv = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding-left: 24px;
-    padding-right: 17px;
+    padding-left: 17px;
+    padding-right: 2px;
     box-sizing: border-box
     `
 const Seats = styled.div`
@@ -130,10 +147,12 @@ const Seats = styled.div`
     min-width: 24px;
     height: 26px;
     border-radius: 12px;
-    background-color: #C3CFD9;
-    border: solid 1px #808F9D;
+    background-color: ${props => props.disponivel ?'#C3CFD9' : '#FBE192'};
+    border: solid 1px ${props => props.disponivel ?'#7B8B99' : '#F7C52B'};
     margin-right: 7px;
     text-align: center;
+    box-sizing: border-box;
+    padding-left: 3px;
     `
 const SmallPoster = styled.img`
     flex: wrap;
@@ -150,15 +169,15 @@ const SmallPoster = styled.img`
 const FooterDiv = styled.div`
     display: flex;
     flex-direction: column;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 40px;
+    padding-bottom: 40px;
     box-sizing: border-box;
     `
 const ReserveForm = styled.form`
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 18px;
     Line-height: 21px;
     Line-height: 100%;
@@ -181,7 +200,7 @@ const ReserveButton = styled.button`
 const ReserveInput = styled.input`
     display: flex;
     font-family: 'Roboto', sans-serif;
-    Font-style: Italic;
+    font-weight: Italic;
     width: 327px;
     height: 51px;
     border: solid 1px #D4D4D4;
@@ -189,3 +208,40 @@ const ReserveInput = styled.input`
     box-sizing: border-box;
     border-radius: 3px;
     `
+const Legenda = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 16px;
+    `
+const SeatsSelected = styled.div`
+    display: flex;
+    justify-position: center;
+    align-items: center;
+    width: 24px;
+    min-width: 24px;
+    height: 26px;
+    border-radius: 12px;
+    background-color: #1AAE9E;
+    border: solid 1px #0E7D71;
+    margin-right: 7px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-left: 3px;
+    `
+const DivLegendas = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: Regular;
+    Font-size: 13px;
+    Line-height: 15px;
+    Line-height: 100%;
+    color: #4E5A65;
+    `
+//selected.includes(seat.name) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></Seats>})
+//pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="Digite seu CPF no formato: xxx.xxx.xxx-xx"

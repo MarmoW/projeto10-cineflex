@@ -2,21 +2,26 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import styled from "styled-components";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
 //import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 
 export default function MainPage() {
     const [movieslist, setMovieslist] = React.useState(undefined)
+    
 
     useEffect(() => {
 		const request = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
-
+        
 		request.then(resposta => {
 		    setMovieslist(resposta.data);
 		});
         console.log(movieslist)
 	}, []);
+    function SelecionarFilme() {
+
+    }
 
     if(movieslist === undefined){
         console.log("carregando")
@@ -31,9 +36,11 @@ export default function MainPage() {
         
         <MoviesDiv>
             {movieslist.map((movie) => 
-            <Movies key={movie.id}>
-                <MoviePoster src={movie.posterURL} alt={movie.title}/>
-            </Movies>     )}
+            <Link key={movie.id} to={`/sessoes/${movie.id}`}>
+                <Movies onClick={SelecionarFilme}>
+                    <MoviePoster src={movie.posterURL} alt={movie.title}/>
+                </Movies>
+            </Link>     )}
                  
         </MoviesDiv>
         </PageContent>
@@ -54,7 +61,7 @@ const Header = styled.div`
     background-color: #C3CFD9;
     color: #E8833A;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 34px;
     Line-height: 40px;
     Line-height: 100%;`
@@ -66,7 +73,7 @@ const SelectMovies =styled.div`
     height: 110px;
     color: #293845;
     font-family: 'Roboto', sans-serif;
-    Font-style: Regular;
+    font-weight: Regular;
     Font-size: 24px;
     Line-height: 28px;
     Line-height: 100%;`
