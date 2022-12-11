@@ -8,6 +8,7 @@ import CreateSeat from "./createseat.js"
 
 export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo, yourseats, setYourseats, seatsnum, setSeatsnum}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
+    const [selecionados, setSelecionados] = React.useState([])
     const { idsec } = useParams();
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idsec}/seats`
     const reserva = {ids:[], name:"", cpf:""}
@@ -45,10 +46,20 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
         if(isAvailable === true && seatsnum.includes(name) === false){
         setYourseats([...yourseats, id])
         setSeatsnum([...seatsnum, name])
+        setSelecionados([...yourseats, id])
         console.log(seatsnum)
         }
         else{
+            if(seatsnum.includes(name)){
+                const filtrando1 = yourseats.filter(seats => seats !== id);
+                const filtrando2 = seatsnum.filter(num => num !== name);
+                setYourseats(filtrando1)
+                setSelecionados(filtrando1) 
+                setSeatsnum(filtrando2)
+            }
+            else {
             alert("Assento indisponível")
+            }
         }
     }
     console.log(yourseats)
@@ -58,7 +69,7 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
         <PageContent>
             <SelectMovies><p>Selecione o(s) assento(s)</p></SelectMovies>
         <SeatsDiv>
-            {seatoptions.seats.map((seat) => <Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)}
+            {seatoptions.seats.map((seat) => <Seats key={seat.id} disponivel={seat.isAvailable} seatid={seat.id} seusassentos={selecionados} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)}
         </SeatsDiv>
         <Legenda>
             <DivLegendas><SeatsSelected /><div>Selecionado</div></DivLegendas>
@@ -168,8 +179,43 @@ const Seats = styled.div`
     min-width: 24px;
     height: 26px;
     border-radius: 12px;
-    background-color: ${props => props.disponivel ?'#C3CFD9' : '#FBE192'};
-    border: solid 1px ${props => props.disponivel ?'#7B8B99' : '#F7C52B'};
+    background-color: ${props => {
+        if(props.disponivel){
+        if(props.seusassentos === undefined){
+            return "#C3CFD9"
+        }
+        
+            if(props.seusassentos.includes(props.seatid) === true){
+                return "#1AAE9E"
+            }
+            else{
+                return "#C3CFD9"
+            }
+
+        }
+        else {
+            return"#FBE192"
+        }
+    }};
+    border: solid 2px ${props => {
+        if(props.disponivel){
+        if(props.seusassentos === undefined){
+            return "#7B8B99"
+        }
+        
+            if(props.seusassentos.includes(props.seatid) === true){
+                return "#0E7D71"
+            }
+            else{
+                return "#7B8B99"
+            }
+
+        }
+        else {
+            return"#F7C52B"
+        }
+    }};
+    
     margin-right: 7px;
     text-align: center;
     box-sizing: border-box;
@@ -268,5 +314,5 @@ const DivLegendas = styled.div`
 //pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="Digite seu CPF no formato: xxx.xxx.xxx-xx"
 
 //<Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)
-
+//props.disponivel ?'#C3CFD9' : '#FBE192'
 //{seatoptions.seats.map((seat) =>  {yourseats.includes(seat.id) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>})}
