@@ -67,7 +67,7 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
             {seatoptions.seats.map((seat) => <Seats key={seat.id} disponivel={seat.isAvailable} seatid={seat.id} seusassentos={selecionados} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)}
         </SeatsDiv>
         <Legenda>
-            <DivLegendas><SeatsSelected /><div>Selecionado</div></DivLegendas>
+            <DivLegendas><SeatsSel/><div>Selecionado</div></DivLegendas>
             <DivLegendas><Seats disponivel={true}></Seats><div>Disponível</div></DivLegendas>
             <DivLegendas><Seats disponivel={false}></Seats><div>Indisponível</div></DivLegendas>
             
@@ -199,6 +199,7 @@ const Seats = styled.div`
         else {
             return"#F7C52B"  }
     }};
+
     margin-right: 7px;
     text-align: center;
     box-sizing: border-box;
@@ -277,4 +278,19 @@ const DivLegendas = styled.div`
     Line-height: 15px;
     Line-height: 100%;
     color: #4E5A65;
+    `
+const SeatsSel = styled.div`
+    display: flex;
+    justify-position: center;
+    align-items: center;
+    width: 24px;
+    min-width: 24px;
+    height: 26px;
+    border-radius: 12px;
+    background-color: #1AAE9E;
+    border: solid 1px #0E7D71;
+    margin-right: 7px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-left: 3px;
     `
