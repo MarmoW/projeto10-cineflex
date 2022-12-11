@@ -27,7 +27,7 @@ export default function SectionPage() {
     console.log(infosections)
     return(
     <>
-    <Header><p>Cineflex</p></Header>
+    <Header><p>CINEFLEX</p></Header>
     <PageContent>
       <SelectMovies><p>Selecione o horário</p></SelectMovies>
     {infosections.days.map((days) => 

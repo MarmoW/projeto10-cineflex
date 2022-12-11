@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import ReactDOM from "react-dom";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import CreateSeat from "./createseat.js"
+
 
 export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo, yourseats, setYourseats, seatsnum, setSeatsnum}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
@@ -60,7 +60,7 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
     }
     return (
         <>
-        <Header><p>Cineflex</p></Header>
+        <Header><p>CINEFLEX</p></Header>
         <PageContent>
             <SelectMovies><p>Selecione o(s) assento(s)</p></SelectMovies>
         <SeatsDiv>

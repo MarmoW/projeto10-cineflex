@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
-//import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+
 
 
 export default function MainPage() {
@@ -27,7 +27,7 @@ export default function MainPage() {
 
     return (
     <>
-        <Header><p>Cineflex</p></Header>
+        <Header><p>CINEFLEX</p></Header>
         <PageContent>
             <SelectMovies><p>Selecione o filme</p></SelectMovies>
         

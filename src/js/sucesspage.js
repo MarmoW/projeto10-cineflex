@@ -11,7 +11,7 @@ export default function SucessPage({usercpf, username, secinfo, yourseats, seats
     console.log(usercpf, username)
     return(
         <>
-        <Header><p>Cineflex</p></Header>
+        <Header><p>CINEFLEX</p></Header>
         <PageContent>
         <OrderOk>Pedido feito com sucesso!</OrderOk>
         <div data-test="movie-info">
