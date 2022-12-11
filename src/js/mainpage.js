@@ -19,9 +19,7 @@ export default function MainPage() {
 		});
         console.log(movieslist)
 	}, []);
-    function SelecionarFilme() {
 
-    }
 
     if(movieslist === undefined){
         console.log("carregando")
@@ -37,7 +35,7 @@ export default function MainPage() {
         <MoviesDiv>
             {movieslist.map((movie) => 
             <Link key={movie.id} to={`/sessoes/${movie.id}`}>
-                <Movies onClick={SelecionarFilme}>
+                <Movies data-test="movie">
                     <MoviePoster src={movie.posterURL} alt={movie.title}/>
                 </Movies>
             </Link>     )}

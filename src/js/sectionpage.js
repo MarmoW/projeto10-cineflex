@@ -31,15 +31,15 @@ export default function SectionPage() {
     <PageContent>
       <SelectMovies><p>Selecione o horário</p></SelectMovies>
     {infosections.days.map((days) => 
-    <MovieSections key={days.id}>
+    <MovieSections key={days.id} data-test="movie-day">
     <p>{days.weekday} - {days.date}</p>
     <ButtonDiv>
-        {days.showtimes.map((times) => <Link to={`/assentos/${times.id}/`} key={times.id}><PickTime> {times.name}</PickTime></Link>)}
+        {days.showtimes.map((times) => <Link to={`/assentos/${times.id}/`} key={times.id} data-test="showtime" ><PickTime> {times.name}</PickTime></Link>)}
     </ButtonDiv>
     </MovieSections>  
     )}
     </PageContent>
-    <Footer>
+    <Footer data-test="footer">
         <SmallPoster src={infosections.posterURL}/>
         <p>{infosections.title}</p>
     </Footer>

@@ -11,15 +11,21 @@ export default function SucessPage({usercpf, username}) {
         <Header><p>Cineflex</p></Header>
         <PageContent>
         <OrderOk>Pedido feito com sucesso!</OrderOk>
+        <div data-test="movie-info">
         <SubTittle>Filme e sessão</SubTittle>
         <OrderInfos>Enola Holmes</OrderInfos>
         <OrderInfos>24/06/2021 15:00</OrderInfos>
+        </div>
+        <div data-test="seats-info">
         <SubTittle>Ingressos</SubTittle>
         <OrderInfos> Assento 16</OrderInfos>
+        </div>
+        <div data-test="client-info">
         <SubTittle>Comprador</SubTittle>
         <OrderInfos>Marcelinho</OrderInfos>
         <OrderInfos>2020202020</OrderInfos>
-        <ConfirmButton>Voltar pra Home</ConfirmButton>
+        </div>
+        <ConfirmButton data-test="go-home-btn">Voltar pra Home</ConfirmButton>
         </PageContent>
         </>
 

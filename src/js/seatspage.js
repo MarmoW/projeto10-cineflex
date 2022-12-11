@@ -37,7 +37,7 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username}) 
         <PageContent>
             <SelectMovies><p>Selecione o(s) assento(s)</p></SelectMovies>
         <SeatsDiv>
-            {seatoptions.seats.map((seat) =>  <Seats key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></Seats>)}           
+            {seatoptions.seats.map((seat) =>  <Seats key={seat.id} disponivel={seat.isAvailable} data-test="seat"><div>{seat.name}</div></Seats>)}           
         </SeatsDiv>
         <Legenda>
             <DivLegendas><SeatsSelected /><div>Selecionado</div></DivLegendas>
@@ -47,13 +47,13 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username}) 
         </Legenda>
         <ReserveForm onSubmit={saveUser}>
             <p>Nome do comprador:</p>
-            <ReserveInput type="text" placeholder="Digite seu nome..." value={username} onChange={(e) => setUsername(e.target.value)} required/>
+            <ReserveInput type="text" placeholder="Digite seu nome..." value={username} onChange={(e) => setUsername(e.target.value)} required data-test="client-name"/>
             <p>CPF do comprador:</p>
-            <ReserveInput type="text" placeholder="Digite seu CPF..." value={usercpf} onChange={(e) => setUsercpf(e.target.value)} required/>
-            <ReserveButton type="submit">Reservar assento(s)</ReserveButton>
+            <ReserveInput type="text" placeholder="Digite seu CPF..." value={usercpf} onChange={(e) => setUsercpf(e.target.value)} required data-test="client-cpf"/>
+            <ReserveButton type="submit" data-test="book-seat-btn">Reservar assento(s)</ReserveButton>
         </ReserveForm>
         </PageContent>
-        <Footer>
+        <Footer data-test="footer">
         <SmallPoster src={seatoptions.movie.posterURL}/>
             <FooterDiv>
                 <div>{seatoptions.movie.title}</div>
