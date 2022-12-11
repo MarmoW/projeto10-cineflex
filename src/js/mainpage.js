@@ -53,13 +53,11 @@ const Header = styled.div`
     height: 67px;
     background-color: #C3CFD9;
     color: #E8833A;
-    Font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     Font-style: Regular;
     Font-size: 34px;
     Line-height: 40px;
     Line-height: 100%;`
-
-
 const SelectMovies =styled.div`
     display: flex;
     align-items:center;
@@ -67,12 +65,11 @@ const SelectMovies =styled.div`
     width: 100%;
     height: 110px;
     color: #293845;
-    Font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     Font-style: Regular;
     Font-size: 24px;
     Line-height: 28px;
     Line-height: 100%;`
-
 const PageContent = styled.div`
     display: flex;
     align-items:center;
@@ -85,7 +82,6 @@ const MoviesDiv = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     flex-basis: 100%;`
-
 const Movies = styled.div`
     display: flex;
     flex: wrap;
