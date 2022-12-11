@@ -6,12 +6,13 @@ import ReactDOM from "react-dom";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import CreateSeat from "./createseat.js"
 
-export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo}) {
+export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo, yourseats, setYourseats, seatsnum, setSeatsnum}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
-    const [selected, setSelected] = React.useState([])
     const { idsec } = useParams();
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idsec}/seats`
+    const reserva = {ids:[], name:"", cpf:""}
     const navigate = useNavigate();
+
     useEffect(() => {
 		const request = axios.get(URL);
 
@@ -30,17 +31,34 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
     function saveUser(event) {
         event.preventDefault();
         console.log(username, usercpf);
-        navigate("/sucesso");
+        reserva.ids = yourseats;
+        reserva.name = username;
+        reserva.cpf = usercpf;
+        const postrequest = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", reserva)
+        postrequest.then(() => navigate("/sucesso"));
+        postrequest.catch((err) => console.log(err.data));
+
         
     }
 
+    function ChoseSeat(isAvailable, id, name) {
+        if(isAvailable === true && seatsnum.includes(name) === false){
+        setYourseats([...yourseats, id])
+        setSeatsnum([...seatsnum, name])
+        console.log(seatsnum)
+        }
+        else{
+            alert("Assento indisponível")
+        }
+    }
+    console.log(yourseats)
     return (
         <>
         <Header><p>Cineflex</p></Header>
         <PageContent>
             <SelectMovies><p>Selecione o(s) assento(s)</p></SelectMovies>
         <SeatsDiv>
-            {seatoptions.seats.map((seat) =>  <Seats key={seat.id} disponivel={seat.isAvailable} data-test="seat"><div>{seat.name}</div></Seats>)}           
+            {seatoptions.seats.map((seat) => <Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)}
         </SeatsDiv>
         <Legenda>
             <DivLegendas><SeatsSelected /><div>Selecionado</div></DivLegendas>
@@ -248,3 +266,7 @@ const DivLegendas = styled.div`
     `
 //selected.includes(seat.name) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></Seats>})
 //pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="Digite seu CPF no formato: xxx.xxx.xxx-xx"
+
+//<Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)
+
+//{seatoptions.seats.map((seat) =>  {yourseats.includes(seat.id) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>})}

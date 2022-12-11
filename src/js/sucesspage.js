@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import ReactDOM from "react-dom";
 
-export default function SucessPage({usercpf, username, secinfo}) {
+export default function SucessPage({usercpf, username, secinfo, yourseats, seatsnum}) {
     function Redirect() {
         window.location.href = '/'
     }
@@ -21,7 +21,7 @@ export default function SucessPage({usercpf, username, secinfo}) {
         </div>
         <div data-test="seats-info">
         <SubTittle>Ingressos</SubTittle>
-        <OrderInfos> Assento 16</OrderInfos>
+        {seatsnum.map((seats) => <OrderInfos key={seats}> Assento {seats}</OrderInfos>)}
         </div>
         <div data-test="client-info">
         <SubTittle>Comprador</SubTittle>

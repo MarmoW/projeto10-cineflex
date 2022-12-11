@@ -11,6 +11,8 @@ function App() {
   const [username, setUsername] = React.useState("")
   const [usercpf, setUsercpf] = React.useState("")
   const [secinfo, setSecinfo] = React.useState(undefined)
+  const [yourseats, setYourseats] = React.useState([])
+  const [seatsnum, setSeatsnum] = React.useState([])
 
 
   return (
@@ -18,8 +20,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/sessoes/:id/" element={<SectionPage setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username}/>} />
-        <Route path="/assentos/:idsec/" element={<SeatsPage setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username} setSecinfo={setSecinfo}/>}/>
-        <Route path="/sucesso" element={<SucessPage usercpf={usercpf} username={username} secinfo={secinfo}/>} />
+        <Route path="/assentos/:idsec/" element={<SeatsPage seatsnum={seatsnum} setSeatsnum={setSeatsnum} setUsername={setUsername} setUsercpf={setUsercpf} usercpf={usercpf} username={username} setSecinfo={setSecinfo} setYourseats={setYourseats} yourseats={yourseats}/>}/>
+        <Route path="/sucesso" element={<SucessPage usercpf={usercpf} username={username} secinfo={secinfo} yourseats={yourseats} seatsnum={seatsnum}/>} />
       </Routes>
     </BrowserRouter>
   );
