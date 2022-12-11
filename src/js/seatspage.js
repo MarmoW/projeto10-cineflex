@@ -21,17 +21,14 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
 		    setSeatoptions(resposta.data);
             setSecinfo(resposta.data);
 		});
-        console.log(seatoptions)
 	}, []);
 
     if(seatoptions === undefined){
-        console.log("carregando")
         return 
     }
     
     function saveUser(event) {
         event.preventDefault();
-        console.log(username, usercpf);
         reserva.ids = yourseats;
         reserva.name = username;
         reserva.cpf = usercpf;
@@ -47,7 +44,6 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
         setYourseats([...yourseats, id])
         setSeatsnum([...seatsnum, name])
         setSelecionados([...yourseats, id])
-        console.log(seatsnum)
         }
         else{
             if(seatsnum.includes(name)){
@@ -62,7 +58,6 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
             }
         }
     }
-    console.log(yourseats)
     return (
         <>
         <Header><p>Cineflex</p></Header>
@@ -184,38 +179,26 @@ const Seats = styled.div`
         if(props.seusassentos === undefined){
             return "#C3CFD9"
         }
-        
             if(props.seusassentos.includes(props.seatid) === true){
-                return "#1AAE9E"
-            }
+                return "#1AAE9E"           }
             else{
-                return "#C3CFD9"
-            }
-
+                return "#C3CFD9"            }
         }
         else {
-            return"#FBE192"
-        }
+            return"#FBE192"        }
     }};
-    border: solid 2px ${props => {
+    border: solid 1px ${props => {
         if(props.disponivel){
         if(props.seusassentos === undefined){
-            return "#7B8B99"
-        }
-        
-            if(props.seusassentos.includes(props.seatid) === true){
-                return "#0E7D71"
-            }
+            return "#7B8B99"        }
+        if(props.seusassentos.includes(props.seatid) === true){
+                return "#0E7D71"            }
             else{
-                return "#7B8B99"
-            }
-
+                return "#7B8B99"            }
         }
         else {
-            return"#F7C52B"
-        }
+            return"#F7C52B"  }
     }};
-    
     margin-right: 7px;
     text-align: center;
     box-sizing: border-box;
@@ -283,21 +266,6 @@ const Legenda = styled.div`
     align-items: center;
     margin-top: 16px;
     `
-const SeatsSelected = styled.div`
-    display: flex;
-    justify-position: center;
-    align-items: center;
-    width: 24px;
-    min-width: 24px;
-    height: 26px;
-    border-radius: 12px;
-    background-color: #1AAE9E;
-    border: solid 1px #0E7D71;
-    margin-right: 7px;
-    text-align: center;
-    box-sizing: border-box;
-    padding-left: 3px;
-    `
 const DivLegendas = styled.div`
     display: flex;
     flex-direction: column;
@@ -310,9 +278,3 @@ const DivLegendas = styled.div`
     Line-height: 100%;
     color: #4E5A65;
     `
-//selected.includes(seat.name) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable}><div>{seat.name}</div></Seats>})
-//pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="Digite seu CPF no formato: xxx.xxx.xxx-xx"
-
-//<Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>)
-//props.disponivel ?'#C3CFD9' : '#FBE192'
-//{seatoptions.seats.map((seat) =>  {yourseats.includes(seat.id) ? <SeatsSelected key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></SeatsSelected> : <Seats key={seat.id} disponivel={seat.isAvailable} onClick={() => ChoseSeat(seat.isAvailable, seat.id, seat.name)}data-test="seat"><div>{seat.name}</div></Seats>})}

@@ -17,12 +17,11 @@ export default function MainPage() {
 		request.then(resposta => {
 		    setMovieslist(resposta.data);
 		});
-        console.log(movieslist)
+        request.catch((err) => console.log(err.data))
 	}, []);
 
 
     if(movieslist === undefined){
-        console.log("carregando")
         return 
     }
 
