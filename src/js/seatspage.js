@@ -5,7 +5,6 @@ import axios from "axios";
 import ReactDOM from "react-dom";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-
 export default function SeatsPage({setUsername, setUsercpf, usercpf, username, setSecinfo, yourseats, setYourseats, seatsnum, setSeatsnum}) {
     const [seatoptions, setSeatoptions] = React.useState(undefined)
     const [selecionados, setSelecionados] = React.useState([])
@@ -13,7 +12,6 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
     const URL = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idsec}/seats`
     const reserva = {ids:[], name:"", cpf:""}
     const navigate = useNavigate();
-
     useEffect(() => {
 		const request = axios.get(URL);
 
@@ -22,11 +20,9 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
             setSecinfo(resposta.data);
 		});
 	}, []);
-
     if(seatoptions === undefined){
         return 
     }
-    
     function saveUser(event) {
         event.preventDefault();
         reserva.ids = yourseats;
@@ -34,11 +30,8 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
         reserva.cpf = usercpf;
         const postrequest = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", reserva)
         postrequest.then(() => navigate("/sucesso"));
-        postrequest.catch((err) => console.log(err.data));
-
-        
+        postrequest.catch((err) => console.log(err.data));       
     }
-
     function ChoseSeat(isAvailable, id, name) {
         if(isAvailable === true && seatsnum.includes(name) === false){
         setYourseats([...yourseats, id])
@@ -69,8 +62,7 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
         <Legenda>
             <DivLegendas><SeatsSel/><div>Selecionado</div></DivLegendas>
             <DivLegendas><Seats disponivel={true}></Seats><div>Disponível</div></DivLegendas>
-            <DivLegendas><Seats disponivel={false}></Seats><div>Indisponível</div></DivLegendas>
-            
+            <DivLegendas><Seats disponivel={false}></Seats><div>Indisponível</div></DivLegendas>    
         </Legenda>
         <ReserveForm onSubmit={saveUser}>
             <p>Nome do comprador:</p>
@@ -87,13 +79,9 @@ export default function SeatsPage({setUsername, setUsercpf, usercpf, username, s
                 <div>{seatoptions.day.weekday}-{seatoptions.name}</div>
             </FooterDiv>
         </Footer>
-        
         </>
-
     )
-
 }
-
 const Header = styled.div`
     position: fixed;
     top: 0;
@@ -109,8 +97,7 @@ const Header = styled.div`
     font-weight: Regular;
     Font-size: 34px;
     Line-height: 40px;
-    Line-height: 100%;
-    `
+    Line-height: 100%;    `
 const Footer = styled.div`
     position: fixed;
     left: 0;
@@ -131,8 +118,7 @@ const Footer = styled.div`
     Font-size: 26px;
     Line-height: 30px;
     Line-height: 100%;
-    color: #293845
-    `
+    color: #293845    `
 const SelectMovies =styled.div`
     display: flex;
     align-items:center;
@@ -144,8 +130,7 @@ const SelectMovies =styled.div`
     font-weight: Regular;
     Font-size: 24px;
     Line-height: 28px;
-    Line-height: 100%;
-    `
+    Line-height: 100%;    `
 const PageContent = styled.div`
     display: flex;
     align-items: flex-start;
@@ -153,8 +138,7 @@ const PageContent = styled.div`
     flex-direction: column;
     margin-top: 67px;
     margin-bottom: 122px;
-    background-color: #ffffff
-    `
+    background-color: #ffffff    `
 const SeatsDiv = styled.div`
     display: flex;
     width: 100%;
@@ -164,8 +148,7 @@ const SeatsDiv = styled.div`
     justify-content: flex-start;
     padding-left: 17px;
     padding-right: 2px;
-    box-sizing: border-box
-    `
+    box-sizing: border-box    `
 const Seats = styled.div`
     display: flex;
     justify-position: center;
@@ -199,12 +182,10 @@ const Seats = styled.div`
         else {
             return"#F7C52B"  }
     }};
-
     margin-right: 7px;
     text-align: center;
     box-sizing: border-box;
-    padding-left: 3px;
-    `
+    padding-left: 3px;    `
 const SmallPoster = styled.img`
     flex: wrap;
     justify-content: center;
@@ -215,15 +196,13 @@ const SmallPoster = styled.img`
     background-color: pink;
     margin-right: 14px;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    `
+    border-radius: 4px;    `
 const FooterDiv = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 40px;
     padding-bottom: 40px;
-    box-sizing: border-box;
-    `
+    box-sizing: border-box;    `
 const ReserveForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -232,8 +211,7 @@ const ReserveForm = styled.form`
     Font-size: 18px;
     Line-height: 21px;
     Line-height: 100%;
-    margin-left: 14px;
-    `
+    margin-left: 14px;    `
 const ReserveButton = styled.button`
     display: flex;
     justify-content: center;
@@ -243,11 +221,10 @@ const ReserveButton = styled.button`
     height: 45px;
     width: 225px;
     background-color: #E8833A;
-    margin-top: 57px; 
+    margin-top: 34px; 
     color: #FFFFFF;
     margin-left:  58px;
-    border-radius: 3px;
-    `
+    border-radius: 3px;    `
 const ReserveInput = styled.input`
     display: flex;
     font-family: 'Roboto', sans-serif;
@@ -257,16 +234,14 @@ const ReserveInput = styled.input`
     border: solid 1px #D4D4D4;
     padding-left: 18px;
     box-sizing: border-box;
-    border-radius: 3px;
-    `
+    border-radius: 3px;    `
 const Legenda = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-top: 16px;
-    `
+    margin-top: 16px;    `
 const DivLegendas = styled.div`
     display: flex;
     flex-direction: column;
@@ -277,8 +252,7 @@ const DivLegendas = styled.div`
     Font-size: 13px;
     Line-height: 15px;
     Line-height: 100%;
-    color: #4E5A65;
-    `
+    color: #4E5A65;    `
 const SeatsSel = styled.div`
     display: flex;
     justify-position: center;
@@ -292,5 +266,4 @@ const SeatsSel = styled.div`
     margin-right: 7px;
     text-align: center;
     box-sizing: border-box;
-    padding-left: 3px;
-    `
+    padding-left: 3px;    `
